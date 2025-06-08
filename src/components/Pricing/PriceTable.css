@@ -1,0 +1,55 @@
+.price-table {
+  margin-bottom: 2rem;
+}
+
+.price-category {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.price-list {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.price-item:last-child {
+  border-bottom: none;
+}
+
+.service-info {
+  flex: 1;
+}
+
+.service-name {
+  margin: 0 0 0.5rem 0;
+}
+
+.service-description {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.service-duration {
+  display: inline-block;
+  font-size: 0.8rem;
+  background-color: #f0f0f0;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.service-price {
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}

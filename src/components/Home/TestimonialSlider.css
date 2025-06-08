@@ -1,0 +1,156 @@
+.testimonial-slider {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.testimonial-container {
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+}
+
+.testimonial-card {
+  background-color: var(--card);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.testimonial-quote {
+  position: relative;
+  padding-top: 1rem;
+}
+
+.quote-icon {
+  width: 40px;
+  height: 40px;
+  fill: var(--primary);
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.testimonial-quote p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  color: var(--card-foreground);
+}
+
+.rating {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.star {
+  color: var(--muted-foreground);
+  font-size: 1.2rem;
+}
+
+.star.filled {
+  color: #FFD700; /* Gold color for stars */
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.testimonial-author img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+}
+
+.testimonial-author h4 {
+  margin-bottom: 0.25rem;
+  font-size: 1.1rem;
+}
+
+.testimonial-author p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+}
+
+.testimonial-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.control-btn {
+  background: var(--muted);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--foreground);
+}
+
+.control-btn:hover {
+  background: var(--primary);
+}
+
+.control-btn:hover svg {
+  fill: white;
+}
+
+.testimonial-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--muted);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dot.active {
+  background: var(--primary);
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+  
+  .testimonial-quote p {
+    font-size: 1rem;
+  }
+  
+  .testimonial-author img {
+    width: 50px;
+    height: 50px;
+  }
+}

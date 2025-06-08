@@ -1,0 +1,22 @@
+.tooth-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--primary, #4361ee);
+  text-decoration: none;
+}
+
+.logo span {
+  display: inline-block;
+  vertical-align: middle;
+}

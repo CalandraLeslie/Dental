@@ -1,0 +1,24 @@
+/* Make sure the tooth icon displays correctly */
+.tooth-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+/* Disable any hover effects on the logo */
+.logo a,
+.logo a:hover,
+.logo a.no-hover,
+.logo a.no-hover:hover {
+  color: inherit;
+  text-decoration: none;
+  background-color: transparent;
+  transform: none;
+}
+
+/* Prevent any pseudo-elements from adding content */
+.logo a::before,
+.logo a::after {
+  content: none !important;
+  display: none !important;
+}

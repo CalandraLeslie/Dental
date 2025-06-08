@@ -1,0 +1,1705 @@
+/* Modern Services Page Styling */
+
+.services-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--foreground);
+  background-color: white;
+}
+
+/* Hero Section */
+.services-hero {
+  background-color: white;
+  background-image: none; /* Remove gradient */
+  color: var(--primary); /* Change text color for visibility */
+  padding: 3rem 0 4rem; /* Reduced from 4rem 0 5rem */
+  text-align: center;
+  position: relative;
+  /* Add subtle separator */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.services-hero h1 {
+  color: var(--primary); /* Change from white to primary */
+}
+
+.services-hero .lead {
+  color: var(--foreground); /* Change from white to foreground */
+  opacity: 1; /* Full opacity for readability */
+}
+
+/* Remove the wave effect that assumes a colored background */
+.services-hero::after {
+  display: none;
+}
+
+/* Filter Tabs - Reduced whitespace */
+.services-filter {
+  padding: 0.5rem 0; /* Reduced from 1rem 0 */
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem; /* Reduced from 1.5rem */
+}
+
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap; /* Prevent wrapping to multiple rows */
+  gap: 0.1rem; /* Reduce gap to fit all tabs */
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling on very small screens */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  padding: 0.4rem 0.6rem; /* Reduced padding */
+  font-size: 0.85rem; /* Slightly smaller font */
+  font-weight: 500;
+  color: var(--foreground);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap; /* Prevent text wrapping */
+  flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+/* Ensure active button styling matches the smaller size */
+.filter-btn.active {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.4rem 0.6rem;
+}
+
+/* Adjust spacing after filter tabs */
+.services-filter + .services-main,
+.services-filter + .services-horizontal,
+.services-filter + .services-rows,
+.services-filter + .category-services-section {
+  padding-top: 1rem; /* Reduced top padding for better flow */
+}
+
+/* Services Grid - Reduce excess padding */
+.services-main {
+  padding: 0 0 2rem; /* Removed top padding since title is now overlapping */
+  position: relative; /* Allow for absolute positioning */
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem; /* Reduced from 2rem */
+  margin-top: 1.5rem; /* Increase spacing between title and grid */
+  width: 100%;
+}
+
+.service-card {
+  background-color: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.service-card.animated {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Service image consistent sizing */
+.service-image,
+.service-card.horizontal .service-image,
+.service-card.row-card .service-image {
+  height: 180px; /* Slightly smaller images for better balance */
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.service-card:hover .service-image img {
+  transform: scale(1.05);
+}
+
+.service-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-top: 0;
+}
+
+.service-content h3 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.service-highlights-preview {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.service-highlights-preview li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--muted-foreground);
+}
+
+.service-highlights-preview li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.btn-read-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.2rem;
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-read-more:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Emergency Services */
+.emergency-services {
+  margin-top: 2rem !important; /* Consistent margin regardless of category */
+  padding: 2rem 0 !important;
+  background-color: white;
+  position: relative;
+  z-index: 2;
+  /* Add subtle separator */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.emergency-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem; /* Further reduced from 2rem */
+  align-items: center;
+  margin-top: 0; /* Remove any top margin */
+}
+
+.emergency-text h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem; /* Further reduced */
+  color: var(--foreground);
+}
+
+.emergency-text p {
+  margin-bottom: 1rem; /* Reduced from 1.5rem */
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+
+.emergency-list {
+  margin: 1rem 0; /* Reduced from 1.5rem 0 */
+  padding-left: 1.5rem;
+}
+
+.emergency-contact {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Increase spacing between phone number and contact button */
+.emergency-contact .phone-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 2rem !important; /* Increased to create more space before button */
+  display: block;
+}
+
+/* CTA Section */
+.services-cta {
+  text-align: center;
+  padding: 5rem 0;
+  background: white; /* Changed from gradient */
+  color: var(--foreground); /* Changed from white */
+  /* Add subtle separator */
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.services-cta h2 {
+  color: var(--primary); /* Changed from white */
+}
+
+.services-cta p {
+  color: var(--foreground); /* Changed from white */
+  opacity: 1; /* Full opacity for readability */
+}
+
+.services-cta .btn-primary {
+  background-color: var(--primary); /* Changed from white */
+  color: white; /* Changed from var(--primary) */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal */
+/* Fixed Modal Styles */
+.service-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 9999;
+  overflow-y: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 30px 15px;
+}
+
+.service-modal-content {
+  background: white;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 8px;
+  margin: auto;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  position: relative;
+}
+
+.modal-header img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.modal-title-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.modal-title-container h2 {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+}
+
+.modal-body {
+  padding: 20px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.service-description {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.service-highlights-modal {
+  padding-left: 20px;
+}
+
+.service-highlights-modal li {
+  margin-bottom: 10px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  padding: 15px 20px;
+  background: #f5f7fa;
+  border-top: 1px solid #e5e7eb;
+}
+
+.modal-footer .btn {
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.modal-footer .btn-primary {
+  background-color: var(--primary, #1e4583);
+  color: white;
+  text-decoration: none;
+  border: none;
+}
+
+.modal-footer .btn-outline {
+  background: transparent;
+  color: var(--primary, #1e4583);
+  border: 1px solid var(--primary, #1e4583);
+}
+
+@media (max-width: 768px) {
+  .modal-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .modal-footer .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .service-modal-overlay {
+    padding: 15px;
+  }
+  
+  .service-modal-content {
+    margin: 15px auto;
+    max-height: calc(100vh - 30px);
+  }
+  
+  .modal-header img {
+    height: 180px;
+  }
+  
+  .modal-title-container h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-footer {
+    flex-direction: column;
+  }
+  
+  .modal-footer .btn {
+    width: 100%;
+  }
+}
+
+/* Horizontal Services Section */
+.services-horizontal {
+  padding: 0.5rem 0 2rem; /* Reduced from 2rem 0 3rem */
+  background-color: white; /* Changed from var(--muted-background) */
+  overflow: hidden;
+  position: relative;
+  margin-top: -1rem; /* Pull content up */
+  /* Add subtle separator */
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  margin-bottom: 1rem; /* Reduced from 1.5rem or 2.5rem */
+  font-size: 1.75rem;
+  color: var(--foreground);
+  text-align: center;
+}
+
+/* Convert horizontal scroll to grid like main services */
+.services-horizontal-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+/* Make horizontal cards match main grid cards width */
+.service-card.horizontal {
+  width: 100%; /* Fill available space in grid cell */
+  flex-shrink: initial; /* Remove the flex-shrink property */
+  background-color: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Update horizontal scroll container */
+.horizontal-scroll-container {
+  position: relative;
+  width: 100%;
+  overflow: visible; /* Allow content to be fully visible */
+  padding-bottom: 1rem;
+}
+
+/* Services Rows Layout */
+.services-rows {
+  padding: 0.5rem 0 0; /* Reduced from 1.5rem */
+  background-color: white; /* Changed from var(--background-alt) */
+  margin-top: -1rem; /* Pull content up */
+  margin-bottom: 0;
+  /* Add subtle separator */
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem; /* Reduced from 2.5rem */
+  color: var(--primary, #1e4583);
+  font-weight: 600;
+}
+
+/* Service Cards - Consistent Sizing across all categories */
+.service-row {
+  display: flex;
+  gap: 1.5rem; /* Reduced from 2rem */
+  margin-bottom: 1rem; /* Reduced from 1.5rem */
+  width: 100%;
+}
+
+/* Exact card sizing */
+.service-card.row-card {
+  flex: 0 0 calc(50% - 1rem); /* Don't allow cards to grow/shrink */
+  width: calc(50% - 1rem);
+  max-width: calc(50% - 1rem);
+  min-width: calc(50% - 1rem);
+  height: 420px; /* Reduced from 450px */
+  margin: 0; /* Remove any margin that might affect sizing */
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* Remove the row card image height override */
+.service-card.row-card .service-image {
+  /* height: 220px; */ /* Comment out or remove this line */
+  width: 100%;
+  overflow: hidden;
+}
+
+.service-card.row-card .service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Fixed content area sizing */
+.service-card.row-card .service-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card.row-card h3 {
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--primary, #1e4583);
+}
+
+/* Empty placeholder styling */
+.service-card.row-card.empty-card {
+  background: transparent;
+  box-shadow: none;
+  border: 2px dashed #eaeaea;
+  opacity: 0.3;
+}
+
+/* Fix for second row consistency */
+.service-row:nth-child(2) {
+  min-height: 450px;
+}
+
+/* Ensure container has consistent height */
+.services-rows-container:after {
+  content: "";
+  display: block;
+  min-height: 150px; /* Reduced from 300px */
+  width: 100%;
+  margin-bottom: -1rem; /* Adjusted from -2rem */
+}
+
+/* Consistent typography in cards */
+.service-highlights-preview {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.service-highlights-preview li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.95rem;
+}
+
+.service-highlights-preview li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary, #1e4583);
+  font-weight: bold;
+}
+
+/* Position button at bottom */
+.btn-read-more {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* Standardized service card styling for ALL card types */
+.service-card,
+.service-card.horizontal,
+.service-card.row-card {
+  /* Base styling */
+  background-color: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  
+  /* Consistent dimensions */
+  width: 100%;
+  min-width: 280px;
+  max-width: 100%;
+  
+  /* Consistent layout */
+  display: flex;
+  flex-direction: column;
+  
+  /* Animation and hover */
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Ensure consistent styling for category-specific pages (Cosmetic, Preventive, etc.) */
+.category-services-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem; /* Reduced from 2rem */
+  width: 100%;
+  padding: 0; /* Remove padding */
+}
+
+/* Apply consistent card sizing to all category types */
+.service-card.category-card {
+  margin-bottom: 0; /* Remove bottom margin */
+  height: auto; /* Let content determine height */
+  min-height: 400px; /* Ensure consistent minimum height */
+  background-color: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure category pages have consistent spacing */
+.category-services-section {
+  padding: 0.5rem 0 1rem; /* Further reduced padding */
+  margin-top: 0; /* Remove negative margin */
+}
+
+/* Remove excess spacing above category content */
+.category-services-wrapper {
+  gap: 1.5rem;
+  padding: 0;
+  margin-top: 0; /* Remove top margin */
+}
+
+/* Ensure hero spacing is consistent across all service pages */
+.services-hero {
+  padding: 3rem 0 4rem; /* Reduced from 4rem 0 5rem */
+}
+
+/* Ensure category sections start immediately after hero */
+.category-services-section,
+.services-horizontal,
+.services-rows {
+  margin-top: 0; /* Remove any negative margins */
+  padding-top: 0.5rem; /* Just enough padding to create separation */
+}
+
+/* Reduce whitespace between grid rows */
+.services-grid,
+.category-services-wrapper,
+.services-horizontal-wrapper {
+  row-gap: 1.25rem; /* Reduced from 1.5rem */
+}
+
+/* Remove extra margins that create inconsistent spacing */
+.services-horizontal-wrapper,
+.service-row:first-child,
+.category-services-wrapper {
+  margin-top: 0;
+}
+
+/* Clean, minimal section titles that blend with the page */
+.services-main .section-title,
+.services-horizontal .section-title,
+.services-rows .section-title,
+.category-services-section .category-title {
+  /* Remove the card-like styling */
+  position: static;
+  text-align: center;
+  margin: 0 auto 1.5rem;
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  font-size: 1.75rem;
+  color: var(--primary, #1e4583);
+  font-weight: 600;
+}
+
+/* Adjust spacing for better content flow */
+.services-main,
+.services-horizontal,
+.services-rows,
+.category-services-section {
+  padding: 2rem 0;
+}
+
+/* Remove negative margins that were pulling titles up */
+.services-main .section-title {
+  margin: 0 0 1.5rem;
+}
+
+/* Ensure proper spacing for grids after the simple titles */
+.services-grid,
+services-horizontal-wrapper,
+.category-services-wrapper {
+  margin-top: 0;
+}
+
+/* Keep section title on main services page only */
+.services-main .section-title {
+  /* Keep existing styling */
+  text-align: center;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  font-size: 1.75rem;
+  color: var(--primary, #1e4583);
+  font-weight: 600;
+  display: block;
+  width: 100%;
+}
+
+/* Remove section titles from sub-menu pages */
+.services-horizontal .section-title,
+.services-rows .section-title,
+.category-services-section .category-title {
+  display: none; /* Hide these titles completely */
+}
+
+/* Adjust spacing for subcategory sections without titles */
+.services-horizontal-wrapper,
+.service-row:first-child,
+.category-services-wrapper {
+  margin-top: 1.5rem; /* Add some space at the top since there's no title */
+}
+
+/* Adjust padding for sections without titles */
+.services-horizontal,
+.services-rows,
+.category-services-section {
+  padding-top: 2.5rem; /* Add more top padding to compensate for missing title */
+}
+
+/* Fix inconsistent background colors */
+.services-rows {
+  padding: 1.5rem 0 0;
+  background-color: white; /* Changed from var(--background-alt, #f8f9fa) */
+  margin-bottom: 0;
+}
+
+/* Ensure body/html background is white */
+html, body {
+  background-color: white;
+}
+
+/* Ensure all service sections have white backgrounds */
+.services-page,
+.services-hero,
+.services-main,
+.emergency-services,
+.services-horizontal,
+.services-rows,
+.services-cta,
+.category-services-section {
+  background-color: white;
+}
+
+/* Remove any background gradients or images */
+.services-hero::before,
+.services-hero::after,
+.services-cta::before,
+.services-cta::after {
+  display: none;
+}
+
+/* Ensure modal has white background */
+.service-modal-content {
+  background: white;
+}
+
+.modal-footer {
+  background: white; /* Changed from #f5f7fa */
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Ensure any background-alt references are white */
+:root {
+  --background-alt: white;
+}
+
+/* Make specialized category pages match the "All" section spacing */
+
+/* Remove extra top spacing from category sections */
+.services-horizontal,
+.services-rows,
+.category-services-section {
+  padding-top: 0.5rem !important; /* Overriding previous values */
+}
+
+/* Eliminate the extra margin in specialized sections */
+.services-horizontal-wrapper,
+.service-row:first-child,
+.category-services-wrapper {
+  margin-top: 0 !important; /* Remove the 1.5rem margin that was creating extra space */
+}
+
+/* Fix emergency services spacing across all category views */
+
+/* OVERRIDE all previous emergency services spacing with !important */
+.emergency-services {
+  margin-top: 2rem !important; /* Consistent margin regardless of category */
+  padding: 2rem 0 !important;
+  background-color: white;
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Apply consistent spacing to cards above emergency section */
+.services-grid,
+.services-horizontal-wrapper,
+.category-services-wrapper,
+.service-row:last-child {
+  margin-bottom: 2rem !important; /* Match the emergency section top margin */
+}
+
+/* Set explicit spacing after each type of service section */
+.services-main,
+.services-horizontal,
+.services-rows,
+.category-services-section {
+  padding-bottom: 0 !important; /* Remove bottom padding that could cause inconsistency */
+}
+
+/* Override emergency service spacing in each specific category context */
+body:has([data-category="preventive"]) .emergency-services,
+body:has([data-category="restorative"]) .emergency-services,
+body:has([data-category="cosmetic"]) .emergency-services,
+body:has([data-category="specialty"]) .emergency-services,
+body:has([data-category="all"]) .emergency-services {
+  margin-top: 2rem !important;
+  padding-top: 2rem !important;
+}
+
+/* Ensure emergency section follows directly after card layouts */
+.services-horizontal-wrapper + .emergency-services,
+.category-services-wrapper + .emergency-services,
+.service-row:last-of-type + .emergency-services,
+.services-grid + .emergency-services {
+  margin-top: 2rem !important;
+}
+
+/* Fix service card container heights to ensure consistent spacing */
+.services-horizontal,
+.category-services-section {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* COMPLETELY ELIMINATE ALL WHITESPACE BETWEEN CARDS AND EMERGENCY SECTION */
+
+/* Override all container bottom margins/padding */
+.services-grid,
+.services-horizontal-wrapper,
+.category-services-wrapper,
+.service-row:last-child {
+  margin-bottom: 0 !important; /* Remove ALL bottom margin */
+  padding-bottom: 0 !important; /* Remove ALL bottom padding */
+}
+
+/* Force emergency section to sit directly under cards */
+.emergency-services {
+  margin-top: 0 !important; /* Remove ALL top margin */
+  padding-top: 1rem !important; /* Minimal top padding */
+  border-top: none !important; /* Remove top border/separator */
+}
+
+/* Make services sections more compact */
+.services-main,
+.services-horizontal,
+.services-rows,
+.category-services-section {
+  padding-bottom: 0 !important; /* Remove ALL bottom padding */
+  margin-bottom: 0 !important; /* Remove ALL bottom margin */
+}
+
+/* Make cards more compact */
+.service-card,
+.service-card.horizontal,
+.service-card.row-card,
+.service-card.category-card {
+  min-height: 380px !important; /* Slightly smaller cards */
+}
+
+/* Make card images smaller */
+.service-image,
+.service-card.horizontal .service-image,
+.service-card.row-card .service-image,
+.service-card.category-card .service-image {
+  height: 160px !important; /* Smaller images */
+}
+
+/* Make card content more compact */
+.service-content {
+  padding: 1rem !important; /* Smaller content padding */
+}
+
+/* Make emergency heading smaller */
+.emergency-text h2 {
+  margin-top: 0 !important;
+  font-size: 1.6rem !important;
+}
+
+/* Force emergency section to be visible on screen with cards */
+.emergency-content {
+  margin-top: 0 !important;
+  gap: 1rem !important; /* Smaller gap between columns */
+}
+
+/* ENSURE CONSISTENT SPACING BETWEEN ALL CATEGORY VIEWS */
+
+/* Make all grid layouts use identical gap/spacing */
+.services-grid,
+.services-horizontal-wrapper,
+.category-services-wrapper {
+  gap: 1.5rem !important;
+  row-gap: 1.5rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Standardize card heights across all views */
+.service-card,
+.service-card.horizontal,
+.service-card.row-card,
+.service-card.category-card {
+  min-height: 380px !important;
+  margin-bottom: 0 !important;
+}
+
+/* Make all service images the exact same height */
+.service-image,
+.service-card .service-image,
+.service-card.horizontal .service-image,
+.service-card.row-card .service-image,
+.service-card.category-card .service-image {
+  height: 180px !important;
+  width: 100% !important;
+}
+
+/* Standardize content padding inside all cards */
+.service-card .service-content,
+.service-card.horizontal .service-content,
+.service-card.row-card .service-content,
+.service-card.category-card .service-content {
+  padding: 1.25rem !important;
+}
+
+/* Reset any section-specific padding/margins */
+.services-main,
+.services-horizontal,
+.services-rows,
+.category-services-section {
+  padding: 0.5rem 0 0 !important;
+  margin: 0 !important;
+}
+
+/* Eliminate specialized category excess spacing */
+div[data-category="preventive"],
+div[data-category="restorative"],
+div[data-category="cosmetic"],
+div[data-category="specialty"] {
+  padding-top: 0.5rem !important;
+  margin-top: 0 !important;
+}
+
+/* Force emergency service section to appear at same position in all views */
+.emergency-services {
+  margin-top: 1.5rem !important;
+  padding-top: 1rem !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* DIRECT EMERGENCY SERVICES POSITIONING FOR SUBCATEGORIES */
+
+/* Target specifically the subcategory emergency sections */
+.services-filter + div[data-category="preventive"] ~ .emergency-services,
+.services-filter + div[data-category="restorative"] ~ .emergency-services,
+.services-filter + div[data-category="cosmetic"] ~ .emergency-services,
+.services-filter + div[data-category="specialty"] ~ .emergency-services {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+  position: relative;
+  top: -10px; /* Pull up the emergency section */
+}
+
+/* Remove ALL bottom spacing from subcategory card containers */
+div[data-category="preventive"] .category-services-wrapper,
+div[data-category="restorative"] .category-services-wrapper,
+div[data-category="cosmetic"] .category-services-wrapper,
+div[data-category="specialty"] .category-services-wrapper,
+div[data-category="preventive"] .services-horizontal-wrapper,
+div[data-category="restorative"] .services-horizontal-wrapper,
+div[data-category="cosmetic"] .services-horizontal-wrapper,
+div[data-category="specialty"] .services-horizontal-wrapper {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Additional fixes for any remaining gaps */
+div[data-category="preventive"] + .emergency-services,
+div[data-category="restorative"] + .emergency-services,
+div[data-category="cosmetic"] + .emergency-services,
+div[data-category="specialty"] + .emergency-services {
+  margin-top: -20px !important;
+}
+
+/* Ensure card content doesn't have extra bottom padding */
+div[data-category="preventive"] .service-card .service-content,
+div[data-category="restorative"] .service-card .service-content,
+div[data-category="cosmetic"] .service-card .service-content,
+div[data-category="specialty"] .service-card .service-content {
+  padding-bottom: 0.5rem !important;
+}
+
+/* Extra rule to catch any containers between cards and emergency */
+div[data-category="preventive"] ~ div:not(.emergency-services),
+div[data-category="restorative"] ~ div:not(.emergency-services),
+div[data-category="cosmetic"] ~ div:not(.emergency-services),
+div[data-category="specialty"] ~ div:not(.emergency-services) {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+}
+
+/* COMPLETELY ELIMINATE ANY REMAINING SPACE - FINAL FIX */
+
+/* More aggressive negative margin for subcategory emergency sections */
+.services-filter + div[data-category="preventive"] ~ .emergency-services,
+.services-filter + div[data-category="restorative"] ~ .emergency-services,
+.services-filter + div[data-category="cosmetic"] ~ .emergency-services,
+.services-filter + div[data-category="specialty"] ~ .emergency-services {
+  margin-top: -30px !important; /* Even more negative to pull up emergency section */
+  padding-top: 0 !important;
+  border-top: none !important;
+}
+
+/* Even smaller cards in specialty sections to reduce whitespace */
+div[data-category="preventive"] .service-card,
+div[data-category="restorative"] .service-card,
+div[data-category="cosmetic"] .service-card,
+div[data-category="specialty"] .service-card {
+  min-height: 340px !important; /* Even smaller height */
+  max-height: 340px !important; /* Force maximum height */
+  overflow: hidden;
+  margin-bottom: -20px !important; /* Negative bottom margin */
+}
+
+/* Make specialty card content areas extremely compact */
+div[data-category="preventive"] .service-card .service-content,
+div[data-category="restorative"] .service-card .service-content,
+div[data-category="cosmetic"] .service-card .service-content,
+div[data-category="specialty"] .service-card .service-content {
+  padding: 0.75rem !important;
+  padding-bottom: 0 !important;
+}
+
+/* Force specialty sections to have negative bottom margin */
+div[data-category="preventive"],
+div[data-category="restorative"],
+div[data-category="cosmetic"],
+div[data-category="specialty"] {
+  margin-bottom: -30px !important;
+}
+
+/* Specifically target the wrapper containers */
+div[data-category="preventive"] > div,
+div[data-category="restorative"] > div,
+div[data-category="cosmetic"] > div,
+div[data-category="specialty"] > div {
+  margin-bottom: -30px !important;
+  padding-bottom: 0 !important;
+}
+
+/* Remove any bottom spacing from image areas */
+div[data-category="preventive"] .service-image,
+div[data-category="restorative"] .service-image,
+div[data-category="cosmetic"] .service-image,
+div[data-category="specialty"] .service-image {
+  margin-bottom: 0 !important;
+}
+
+/* Use transform to pull emergency services up even more aggressively */
+div[data-category="preventive"] ~ .emergency-services,
+div[data-category="restorative"] ~ .emergency-services,
+div[data-category="cosmetic"] ~ .emergency-services,
+div[data-category="specialty"] ~ .emergency-services {
+  transform: translateY(-20px);
+}
+
+/* ABSOLUTE FINAL WHITESPACE KILLER - EXTREME MEASURES */
+
+/* Target every possible source of whitespace */
+html[data-category-view="preventive"] .emergency-services,
+html[data-category-view="restorative"] .emergency-services,
+html[data-category-view="cosmetic"] .emergency-services,
+html[data-category-view="specialty"] .emergency-services,
+div[data-category="preventive"] ~ .emergency-services,
+div[data-category="restorative"] ~ .emergency-services,
+div[data-category="cosmetic"] ~ .emergency-services,
+div[data-category="specialty"] ~ .emergency-services {
+  margin-top: -500px !important; /* Extreme negative margin */
+  transform: translateY(-300px) !important;
+  position: relative !important;
+  z-index: 999 !important;
+}
+
+/* Eliminate all height on containers */
+.services-horizontal,
+.category-services-section {
+  margin-bottom: -300px !important;
+  padding-bottom: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Force cards to be extremely compact */
+div[data-category="preventive"] .service-card,
+div[data-category="restorative"] .service-card,
+div[data-category="cosmetic"] .service-card,
+div[data-category="specialty"] .service-card {
+  min-height: 200px !important; /* Tiny card height */
+  max-height: 200px !important;
+}
+
+/* Use absolute positioning for emergency section */
+.emergency-services {
+  position: absolute !important;
+  top: 500px !important;
+  width: 100% !important;
+}
+
+/* Force section overlap */
+.services-horizontal + *,
+.category-services-section + * {
+  margin-top: -500px !important;
+}
+
+/* Hide any spacer elements */
+.services-horizontal + div:not(.emergency-services),
+.category-services-section + div:not(.emergency-services) {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Absolute positioning for category sections */
+div[data-category] {
+  position: relative !important;
+  overflow: visible !important;
+  margin-bottom: -500px !important;
+}
+
+/* Force emergency to appear immediately after cards */
+.services-page {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* ADJUSTED EMERGENCY POSITIONING - SHOW SERVICE TEXT */
+
+/* Modify the emergency section positioning */
+html[data-category-view="preventive"] .emergency-services,
+html[data-category-view="restorative"] .emergency-services,
+html[data-category-view="cosmetic"] .emergency-services,
+html[data-category-view="specialty"] .emergency-services,
+div[data-category="preventive"] ~ .emergency-services,
+div[data-category="restorative"] ~ .emergency-services,
+div[data-category="cosmetic"] ~ .emergency-services,
+div[data-category="specialty"] ~ .emergency-services {
+  margin-top: 150px !important; /* Changed from 0 to 150px */
+  transform: translateY(0) !important;
+  position: relative !important;
+  z-index: 999 !important;
+}
+
+/* Reset other emergency section properties for consistent spacing */
+.emergency-services {
+  padding-top: 2rem !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* FINAL EMERGENCY SECTION POSITIONING */
+
+/* Reset and clean up all previous emergency section positioning */
+html[data-category-view="preventive"] .emergency-services,
+html[data-category-view="restorative"] .emergency-services,
+html[data-category-view="cosmetic"] .emergency-services,
+html[data-category-view="specialty"] .emergency-services,
+div[data-category="preventive"] ~ .emergency-services,
+div[data-category="restorative"] ~ .emergency-services,
+div[data-category="cosmetic"] ~ .emergency-services,
+div[data-category="specialty"] ~ .emergency-services,
+.emergency-services {
+  margin-top: 40px !important; /* Consistent modest margin */
+  transform: none !important;
+  position: relative !important;
+  top: auto !important;
+  padding-top: 30px !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+  z-index: 1 !important;
+}
+
+/* Reset card container bottom spacing */
+.services-grid,
+services-horizontal-wrapper,
+.category-services-wrapper,
+.service-row:last-child,
+div[data-category="preventive"],
+div[data-category="restorative"],
+div[data-category="cosmetic"],
+div[data-category="specialty"],
+div[data-category] {
+  margin-bottom: 0 !important;
+  position: static !important;
+  overflow: visible !important;
+}
+
+/* Reset service card dimensions to show full content */
+.service-card,
+.service-card.horizontal,
+.service-card.row-card,
+.service-card.category-card {
+  min-height: 380px !important;
+  max-height: none !important;
+  overflow: visible !important;
+  margin-bottom: 0 !important;
+}
+
+/* Reset emergency content spacing */
+.emergency-content {
+  gap: 2rem !important;
+  margin-top: 0 !important;
+}
+
+/* FINAL FIX - ELIMINATE FULL SCREEN OF WHITESPACE */
+
+/* Direct emergency section positioning with maximum specificity */
+html body .services-page div[data-category] ~ .emergency-services,
+html body .services-page .emergency-services {
+  margin-top: -300px !important; /* Extreme negative margin */
+  transform: translateY(-200px) !important; /* Additional negative transform */
+  position: relative !important;
+  z-index: 9999 !important; /* Ensure it's on top */
+}
+
+/* Force service cards to have less height */
+html body .services-page div[data-category] .service-card {
+  min-height: 320px !important;
+  max-height: 320px !important;
+  overflow: hidden !important;
+}
+
+/* Force all containers to collapse vertical space */
+html body .services-page div[data-category],
+html body .services-page .category-services-section,
+html body .services-page .services-horizontal {
+  margin-bottom: -200px !important;
+  padding-bottom: 0 !important;
+}
+
+/* Ensure no container creates space */
+html body .services-page div[data-category] ~ div:not(.emergency-services) {
+  height: 0 !important;
+  display: none !important;
+}
+
+/* FIX EMERGENCY CARE SECTION POSITIONING FOR "ALL" SECTION ONLY */
+
+/* Reset emergency section positioning ONLY for the "All" category view */
+html[data-category-view="all"] .emergency-services,
+body:has([data-category="all"]) .emergency-services,
+div[data-category="all"] ~ .emergency-services {
+  margin-top: 40px !important; /* Add positive margin */
+  transform: none !important; /* Remove transform */
+  position: relative !important;
+  top: auto !important;
+  padding-top: 30px !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+  z-index: 1 !important;
+}
+
+/* Ensure proper spacing after service cards in All section */
+div[data-category="all"],
+div[data-category="all"] .services-grid {
+  margin-bottom: 0 !important;
+  position: static !important;
+  overflow: visible !important;
+}
+
+/* Reset extreme negative margin for All section */
+html body .services-page div[data-category="all"] ~ .emergency-services {
+  margin-top: 40px !important;
+  transform: none !important;
+  position: relative !important;
+}
+
+/* Maintain the current positioning for all other categories */
+/* No changes needed as those rules are already working as desired */
+
+/* Display 4 services in a single row for "All services" section */
+div[data-category="all"] .services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) !important; /* Force 4 columns */
+  gap: 1rem !important; /* Reduced gap to fit all items */
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+/* Make cards narrower to fit 4 in a row */
+div[data-category="all"] .service-card {
+  min-width: auto !important;
+  width: 100% !important;
+}
+
+/* Adjust service card padding for the narrower layout */
+div[data-category="all"] .service-card .service-content {
+  padding: 1rem !important;
+}
+
+/* FORCE 4 COLUMNS IN ALL SERVICES SECTION - MAXIMUM SPECIFICITY */
+html body .services-page div[data-category="all"] .services-grid,
+html body .services-page [data-category="all"] .services-grid,
+html body .services-page .services-main .services-grid,
+body:has([data-category="all"]) .services-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important; /* Force 4 columns */
+  gap: 1rem !important; /* Reduced gap to fit all items */
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Make cards in All section more compact */
+html body .services-page div[data-category="all"] .service-card,
+html body .services-page .services-main .service-card {
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 400px !important;
+  flex: 1 1 auto !important;
+}
+
+/* Adjust card content for narrower layout */
+html body .services-page div[data-category="all"] .service-card .service-content,
+html body .services-page .services-main .service-card .service-content {
+  padding: 0.75rem !important;
+  font-size: 0.9rem !important;
+}
+
+/* Smaller headings in card content */
+html body .services-page div[data-category="all"] .service-card h3,
+html body .services-page .services-main .service-card h3 {
+  font-size: 1.1rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* FORCE SINGLE ROW FOR ALL SERVICES SECTION */
+html body .services-page div[data-category="all"] .services-grid,
+html body .services-page .services-main .services-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important; /* Force exactly 4 columns */
+  grid-template-rows: 1fr !important; /* Force a single row */
+  gap: 1rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Adjust card dimensions for the single row layout */
+html body .services-page div[data-category="all"] .service-card,
+html body .services-page .services-main .service-card {
+  min-width: 0 !important;
+  width: 100% !important;
+  height: 400px !important; /* Fixed height for consistency */
+  max-height: 400px !important;
+}
+
+/* Smaller content for better fit in narrower cards */
+html body .services-page div[data-category="all"] .service-card .service-content {
+  padding: 0.75rem !important;
+  font-size: 0.9rem !important;
+}
+
+/* Ensure emergency section appears properly below the row */
+html body .services-page div[data-category="all"] + .emergency-services,
+html body .services-page .services-main + .emergency-services {
+  margin-top: 2rem !important;
+  position: static !important;
+  transform: none !important;
+}
+
+/* REORGANIZE SERVICES ON ALL SERVICES PAGE */
+
+/* Force display of all service categories */
+html body .services-page div[data-category="all"],
+html body .services-page .services-main,
+html body .services-page .services-grid {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  overflow: visible !important;
+  height: auto !important;
+  width: 100% !important;
+}
+
+/* Reorder services to put Cosmetic and Specialty at the top */
+html body .services-page div[data-category="all"] .services-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-rows: auto !important;
+  gap: 1.5rem !important;
+  width: 100% !important;
+}
+
+/* Ensure Cosmetic and Specialty services appear first */
+html body .services-page div[data-category="all"] .service-card[data-service="cosmetic"],
+html body .services-page div[data-category="all"] .service-card[data-service="specialty"] {
+  order: -1 !important; /* Negative order to bring to beginning */
+  grid-row: 1 !important; /* Force to first row */
+}
+
+/* Position emergency section below all services */
+html body .services-page div[data-category="all"] + .emergency-services,
+html body .services-page .services-main + .emergency-services {
+  margin-top: 3rem !important;
+  position: static !important;
+  transform: none !important;
+}
+
+/* Show the "All" button in filter tabs */
+.filter-btn[data-filter="all"],
+.filter-btn[data-category="all"] {
+  display: inline-flex !important;
+}
+
+/* FORCE ALL 4 SERVICES ON ONE SINGLE ROW - MAXIMUM SPECIFICITY */
+html body .services-page div[data-category="all"] .services-grid {
+  display: flex !important; /* Use flexbox instead of grid for more reliable single row */
+  flex-direction: row !important;
+  flex-wrap: nowrap !important; /* Prevent wrapping to multiple rows */
+  justify-content: space-between !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  gap: 10px !important;
+  grid-template-columns: unset !important;
+  grid-auto-flow: unset !important;
+}
+
+/* Force equal width for all 4 cards */
+html body .services-page div[data-category="all"] .service-card,
+body .services-page div[data-category="all"] .service-card {
+  flex: 1 0 calc(25% - 10px) !important;
+  min-width: calc(25% - 10px) !important;
+  max-width: calc(25% - 10px) !important;
+  width: calc(25% - 10px) !important;
+  margin: 0 !important;
+  display: block !important;
+  position: relative !important;
+}
+
+/* Make sure child elements don't mess up layout */
+html body .services-page div[data-category="all"] .service-card > *,
+body .services-page div[data-category="all"] .service-card > * {
+  max-width: 100% !important;
+}
+
+/* Remove any grid properties that might be interfering */
+html body .services-page div[data-category="all"] {
+  display: block !important;
+  grid-template-rows: unset !important;
+  grid-template-columns: unset !important;
+}
+
+/* REMOVE ALL SERVICES SECTION COMPLETELY */
+
+/* Hide the All button in the filter tabs */
+.filter-btn[data-filter="all"],
+.filter-btn[data-category="all"] {
+  display: none !important;
+}
+
+/* Hide the All services content section */
+div[data-category="all"],
+[data-category="all"],
+html body .services-page div[data-category="all"] {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  opacity: 0 !important;
+}
+
+/* Make Preventive the default active tab */
+.filter-btn[data-filter="preventive"],
+.filter-btn[data-category="preventive"] {
+  background-color: var(--primary) !important;
+  color: white !important;
+}
+
+/* ABSOLUTE REMOVAL OF ALL SERVICES SECTION */
+
+/* Apply maximum specificity to override any other rules */
+html body .services-page div[data-category="all"],
+html body .services-page [data-category="all"],
+html body div[data-category="all"],
+html [data-category="all"],
+body [data-category="all"],
+div[data-category="all"],
+[data-category="all"],
+.services-main {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  overflow: hidden !important;
+  max-height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  clip: rect(0, 0, 0, 0) !important;
+}
+
+/* Make sure the All filter tab is completely removed */
+html body .filter-btn[data-filter="all"],
+html body .filter-btn[data-category="all"],
+.filter-btn[data-filter="all"],
+.filter-btn[data-category="all"] {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+}
+
+/* Make Preventive the default active tab */
+.filter-btn[data-filter="preventive"] {
+  background-color: var(--primary) !important;
+  color: white !important;
+}
+
+/* NUCLEAR OPTION TO REMOVE ALL SERVICES */
+
+/* !important tags on all properties with maximum selector specificity */
+html body .services-page div[data-category="all"],
+html body .services-page *[data-category="all"],
+html body div[data-category="all"],
+html body [data-category="all"],
+html body .services-main:not(.services-horizontal):not(.services-rows):not(.category-services-section),
+*[data-category="all"] {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  max-height: 0 !important;
+  max-width: 0 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -99999px !important;
+  top: -99999px !important;
+  z-index: -9999 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(100%) !important;
+  pointer-events: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+/* Target the All button specifically */
+html body .filter-btn[data-filter="all"],
+html body button[data-filter="all"],
+html body .filter-tabs button[data-filter="all"],
+html body .filter-tabs .filter-btn[data-filter="all"],
+.filter-btn[data-filter="all"],
+button[data-filter="all"] {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(100%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Force Preventive tab to be active and visible */
+html body .filter-btn[data-filter="preventive"] {
+  background-color: var(--primary) !important;
+  color: white !important;
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Make Preventive section visible by default */
+html body div[data-category="preventive"] {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+}
+
+/* ENSURE ALL SERVICES DISPLAY IN ONE ROW */
+
+/* Target the services grid in All view with maximum specificity */
+html body .services-page div[data-category="all"] .services-grid,
+html body .services-page .services-main .services-grid,
+html body div[data-category="all"] .services-grid,
+body .services-grid[data-category="all"],
+.services-grid[data-category="all"] {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 1rem 0 2rem 0 !important;
+  gap: 12px !important;
+}
+
+/* Force each service card to be the exact same width */
+html body .services-page div[data-category="all"] .service-card,
+html body div[data-category="all"] .service-card,
+body div[data-category="all"] .service-card {
+  flex: 1 0 calc(25% - 9px) !important;
+  width: calc(25% - 9px) !important;
+  max-width: calc(25% - 9px) !important;
+  min-width: calc(25% - 9px) !important;
+  margin: 0 !important;
+}
+
+/* Adjust card contents for narrower layout */
+html body div[data-category="all"] .service-card .service-content {
+  padding: 0.75rem !important;
+  font-size: 0.9rem !important;
+}
+
+/* Ensure the emergency section appears directly below */
+html body div[data-category="all"] + .emergency-services {
+  margin-top: 2rem !important;
+  position: static !important;
+  transform: none !important;
+}
