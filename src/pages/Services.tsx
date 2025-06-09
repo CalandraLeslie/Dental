@@ -92,6 +92,157 @@ const ServiceModal: React.FC<{
   );
 };
 
+// Add this new component above your main Services component
+const ServiceRow: React.FC = () => {
+  // These are the four main service categories
+  const serviceCategories = [
+    { id: "cosmetic", title: "Cosmetic Dentistry", image: "/images/services/cosmetic.jpg" },
+    { id: "preventive", title: "Preventive Care", image: "/images/services/preventive.jpg" },
+    { id: "restorative", title: "Restorative Treatments", image: "/images/services/restorative.jpg" },
+    { id: "specialty", title: "Specialty Dental Care", image: "/images/services/specialty.jpg" }
+  ];
+
+  return (
+    <section className="all-services-row" style={{ margin: '30px 0 120px 0' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 5 }}>
+        <h2 className="section-title">Our Dental Services</h2>
+        
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'row', 
+          flexWrap: 'nowrap',
+          justifyContent: 'space-between',
+          gap: '20px', 
+          marginBottom: '80px',
+          width: '100%',
+          position: 'relative',
+          zIndex: 10
+        }}>
+          {serviceCategories.map(service => (
+            <div 
+              key={service.id}
+              className="service-card" 
+              data-category={service.id}
+              style={{
+                flex: '1 0 calc(25% - 15px)',
+                width: 'calc(25% - 15px)',
+                minWidth: 'calc(25% - 15px)',
+                maxWidth: 'calc(25% - 15px)',
+                height: '700px', // Fixed height
+                minHeight: '700px',
+                maxHeight: '700px',
+                display: 'flex',
+                flexDirection: 'column',
+                boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
+                borderRadius: '8px',
+                backgroundColor: 'white',
+                position: 'relative',
+                zIndex: 15,
+                overflow: 'hidden'
+              }}
+            >
+              <div style={{ 
+                height: '220px', 
+                overflow: 'hidden',
+                width: '100%'
+              }}>
+                <img 
+                  src={service.image} 
+                  alt={service.title} 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover' 
+                  }} 
+                />
+              </div>
+              <div style={{ 
+                padding: '1.5rem', 
+                display: 'flex', 
+                flexDirection: 'column',
+                flex: '1',
+                height: 'calc(100% - 220px)',
+                overflow: 'auto'
+              }}>
+                <h3 style={{ marginTop: 0 }}>{service.title}</h3>
+                <ServiceContent serviceType={service.id} />
+                <button 
+                  className="btn-read-more" 
+                  style={{ 
+                    marginTop: 'auto', 
+                    alignSelf: 'flex-start',
+                    padding: '8px 16px',
+                    backgroundColor: '#4a7aff',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer'
+                  }}
+                  onClick={() => window.location.href = `/services#${service.id}`}
+                >
+                  Learn More
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Add this helper component to display appropriate content for each service type
+const ServiceContent: React.FC<{serviceType: string}> = ({ serviceType }) => {
+  switch(serviceType) {
+    case 'preventive':
+      return (
+        <>
+          <p>Regular check-ups and preventive care to maintain your oral health.</p>
+          <ul className="service-highlights-preview">
+            <li>Comprehensive dental exams</li>
+            <li>Professional cleanings</li>
+            <li>Fluoride treatments</li>
+          </ul>
+        </>
+      );
+    case 'restorative':
+      return (
+        <>
+          <p>Solutions to repair damaged or missing teeth and restore function.</p>
+          <ul className="service-highlights-preview">
+            <li>Dental fillings</li>
+            <li>Crowns and bridges</li>
+            <li>Dental implants</li>
+          </ul>
+        </>
+      );
+    case 'cosmetic':
+      return (
+        <>
+          <p>Enhance the appearance of your smile with our cosmetic treatments.</p>
+          <ul className="service-highlights-preview">
+            <li>Professional teeth whitening</li>
+            <li>Porcelain veneers</li>
+            <li>Smile makeovers</li>
+          </ul>
+        </>
+      );
+    case 'specialty':
+      return (
+        <>
+          <p>Advanced dental services for more complex oral health needs.</p>
+          <ul className="service-highlights-preview">
+            <li>Root canal therapy</li>
+            <li>Periodontal treatment</li>
+            <li>Oral surgery</li>
+          </ul>
+        </>
+      );
+    default:
+      return <p>Learn more about our dental services.</p>;
+  }
+};
+
 const Services: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<ServiceType | null>(null);
@@ -373,8 +524,19 @@ const Services: React.FC = () => {
         </div>
       </section>
 
+      {/* Render all services row BEFORE emergency section when "all" category is active */}
+      {activeCategory === 'all' && (
+        <div style={{ 
+          position: 'relative', 
+          marginBottom: '30px',
+          zIndex: 5 
+        }}>
+          <ServiceRow />
+        </div>
+      )}
+      
       {/* Streamlined emergency services section */}
-      <section className="emergency-services">
+      <section className="emergency-services" style={{ position: 'relative', zIndex: 1 }}>
         <div className="container">
           <div className="emergency-content">
             <div className="emergency-text">

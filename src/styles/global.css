@@ -1,0 +1,65 @@
+/* Disable all scrolling on the website */
+html, body {
+  overflow: hidden !important;
+  height: 100% !important;
+  position: fixed !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Remove smooth scrolling behavior */
+html {
+  scroll-behavior: auto;
+}
+
+/* Prevent scrolling on containers too */
+.main-content, 
+.container, 
+.services-page,
+.pricing-page,
+.about-page,
+.contact-page {
+  overflow: hidden !important;
+}
+
+/* Ensure content doesn't cause overflow */
+.site-layout {
+  height: 100vh;
+  overflow: hidden !important;
+}
+
+/* Allow content to scroll on specific pages */
+.home-page,
+.contact-page {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  position: relative !important;
+}
+
+/* Fix feature cards display on contact page */
+.contact-page .features-section {
+  background-color: #ffffff;
+  padding: 3rem 0;
+}
+
+.contact-page .section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary, #1e4583);
+  font-size: 2rem;
+}
+
+/* Fix contact form display on home page */
+.home-page .contact-main {
+  padding: 4rem 0;
+  background-color: #ffffff;
+}
+
+.home-page .section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary, #1e4583);
+  font-size: 2rem;
+}

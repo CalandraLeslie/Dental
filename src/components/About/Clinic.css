@@ -1,0 +1,10 @@
+/* Optimize height to reduce scrolling */
+.clinic-section {
+  /* Keep existing styles */
+  max-height: 600px; /* Set maximum height */
+}
+
+.clinic-content {
+  /* Keep existing styles */
+  overflow-y: auto; /* Add scrolling within content if needed */
+}
