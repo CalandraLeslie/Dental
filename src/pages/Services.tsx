@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import '../styles/services.css';
+
+// Define animation variants
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1,
+    y: 0,
+    transition: { 
+      duration: 0.8 
+    }
+  }
+};
 
 interface ServiceType {
   id: number;
@@ -92,105 +105,6 @@ const ServiceModal: React.FC<{
   );
 };
 
-// Add this new component above your main Services component
-const ServiceRow: React.FC = () => {
-  // These are the four main service categories
-  const serviceCategories = [
-    { id: "cosmetic", title: "Cosmetic Dentistry", image: "/images/services/cosmetic.jpg" },
-    { id: "preventive", title: "Preventive Care", image: "/images/services/preventive.jpg" },
-    { id: "restorative", title: "Restorative Treatments", image: "/images/services/restorative.jpg" },
-    { id: "specialty", title: "Specialty Dental Care", image: "/images/services/specialty.jpg" }
-  ];
-
-  return (
-    <section className="all-services-row" style={{ margin: '30px 0 120px 0' }}>
-      <div className="container" style={{ position: 'relative', zIndex: 5 }}>
-        <h2 className="section-title">Our Dental Services</h2>
-        
-        <div style={{ 
-          display: 'flex', 
-          flexDirection: 'row', 
-          flexWrap: 'nowrap',
-          justifyContent: 'space-between',
-          gap: '20px', 
-          marginBottom: '80px',
-          width: '100%',
-          position: 'relative',
-          zIndex: 10
-        }}>
-          {serviceCategories.map(service => (
-            <div 
-              key={service.id}
-              className="service-card" 
-              data-category={service.id}
-              style={{
-                flex: '1 0 calc(25% - 15px)',
-                width: 'calc(25% - 15px)',
-                minWidth: 'calc(25% - 15px)',
-                maxWidth: 'calc(25% - 15px)',
-                height: '700px', // Fixed height
-                minHeight: '700px',
-                maxHeight: '700px',
-                display: 'flex',
-                flexDirection: 'column',
-                boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
-                borderRadius: '8px',
-                backgroundColor: 'white',
-                position: 'relative',
-                zIndex: 15,
-                overflow: 'hidden'
-              }}
-            >
-              <div style={{ 
-                height: '220px', 
-                overflow: 'hidden',
-                width: '100%'
-              }}>
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
-                  style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover' 
-                  }} 
-                />
-              </div>
-              <div style={{ 
-                padding: '1.5rem', 
-                display: 'flex', 
-                flexDirection: 'column',
-                flex: '1',
-                height: 'calc(100% - 220px)',
-                overflow: 'auto'
-              }}>
-                <h3 style={{ marginTop: 0 }}>{service.title}</h3>
-                <ServiceContent serviceType={service.id} />
-                <button 
-                  className="btn-read-more" 
-                  style={{ 
-                    marginTop: 'auto', 
-                    alignSelf: 'flex-start',
-                    padding: '8px 16px',
-                    backgroundColor: '#4a7aff',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer'
-                  }}
-                  onClick={() => window.location.href = `/services#${service.id}`}
-                >
-                  Learn More
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
 // Add this helper component to display appropriate content for each service type
 const ServiceContent: React.FC<{serviceType: string}> = ({ serviceType }) => {
   switch(serviceType) {
@@ -247,7 +161,6 @@ const Services: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<ServiceType | null>(null);
   const [activeCategory, setActiveCategory] = useState('all');
-  const [animatedItems, setAnimatedItems] = useState<number[]>([]);
 
   // Services data with professional dental images and icons
   const services = [
@@ -318,16 +231,17 @@ const Services: React.FC = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && (entry.target as HTMLElement).dataset.serviceId) {
-          const id = parseInt((entry.target as HTMLElement).dataset.serviceId!);
-          setAnimatedItems(prev => [...prev, id]);
+          // Animation can be handled directly here if needed
+          const element = entry.target as HTMLElement;
+          element.classList.add('animated');
         }
       });
     }, { threshold: 0.1 });
-
+    
     document.querySelectorAll('.service-card').forEach(el => {
       observer.observe(el);
     });
-
+    
     return () => observer.disconnect();
   }, [filteredServices]);
 
@@ -337,7 +251,7 @@ const Services: React.FC = () => {
     // Disable body scrolling when modal is open
     document.body.style.overflow = 'hidden';
   };
-
+  
   const closeModal = () => {
     setIsModalOpen(false);
     // Ensure body scrolling is restored
@@ -348,210 +262,120 @@ const Services: React.FC = () => {
 
   return (
     <div className="services-page">
-      {/* Modern, appropriately sized hero section */}
+      {/* Hero Section with blue overlay - Emergency Focus */}
       <section className="services-hero">
+        <img 
+          src="https://images.pexels.com/photos/3881449/pexels-photo-3881449.jpeg?auto=compress&cs=tinysrgb&w=800" 
+          alt="Emergency dental services"
+          className="hero-bg"
+        />
+        <div className="hero-overlay"></div>
         <div className="container">
-          <div className="hero-content">
-            <h1>Our Services</h1>
-            <p className="lead">Comprehensive dental care with a gentle approach</p>
-          </div>
+          <motion.h1
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+          >
+            Emergency Dental Care
+          </motion.h1>
+          <motion.p
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            className="lead"
+          >
+            24-Hour Dental Services When You Need It Most
+          </motion.p>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            className="hero-emergency-cta"
+          >
+            <a href="tel:5551234567" className="btn btn-emergency">Call Now: (555) 123-4567</a>
+          </motion.div>
         </div>
       </section>
 
-      {/* Service categories filter */}
-      <section className="services-filter">
+      {/* Display all services directly after filter tabs - removed heading */}
+      <section className="services-main">
         <div className="container">
-          <div className="filter-tabs">
-            <button 
-              className={`filter-btn ${activeCategory === 'all' ? 'active' : ''}`} 
-              onClick={() => setActiveCategory('all')}
-            >
-              All Services
-            </button>
-            <button 
-              className={`filter-btn ${activeCategory === 'preventive' ? 'active' : ''}`} 
-              onClick={() => setActiveCategory('preventive')}
-            >
-              Preventive
-            </button>
-            <button 
-              className={`filter-btn ${activeCategory === 'restorative' ? 'active' : ''}`} 
-              onClick={() => setActiveCategory('restorative')}
-            >
-              Restorative
-            </button>
-            <button 
-              className={`filter-btn ${activeCategory === 'cosmetic' ? 'active' : ''}`} 
-              onClick={() => setActiveCategory('cosmetic')}
-            >
-              Cosmetic
-            </button>
-            <button 
-              className={`filter-btn ${activeCategory === 'specialty' ? 'active' : ''}`} 
-              onClick={() => setActiveCategory('specialty')}
-            >
-              Specialty
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Services in horizontal rows */}
-      <section className="services-rows">
-        <div className="container">
-          <h2 className="section-title">Our Dental Services</h2>
-          
-          {/* Display services in pairs on each row */}
-          {filteredServices.length > 0 ? (
-            <div className="services-rows-container">
-              {/* First row - always showing 2 cards or placeholders */}
-              <div className="service-row">
-                {filteredServices.slice(0, 2).map((service) => (
-                  <div 
-                    key={service.id} 
-                    className={`service-card row-card ${animatedItems.includes(service.id) ? 'animated' : ''}`}
-                    data-service-id={service.id}
-                  >
-                    <div className="service-image">
-                      <img src={service.image} alt={service.title} />
-                    </div>
-                    <div className="service-content">
-                      <h3>{service.title}</h3>
-                      <ul className="service-highlights-preview">
-                        {service.highlights.slice(0, 2).map((highlight, index) => (
-                          <li key={index}>{highlight.split(':')[0]}</li>
-                        ))}
-                      </ul>
-                      <button 
-                        className="btn btn-read-more" 
-                        onClick={() => openServiceModal(service)}
-                        aria-label={`Learn more about ${service.title}`}
-                      >
-                        Learn More
-                      </button>
-                    </div>
-                  </div>
-                ))}
-                {/* Add empty placeholders as needed to maintain 2 cards per row */}
-                {filteredServices.length === 0 && (
-                  <>
-                    <div className="service-card row-card empty-card"></div>
-                    <div className="service-card row-card empty-card"></div>
-                  </>
-                )}
-                {filteredServices.length === 1 && (
-                  <div className="service-card row-card empty-card"></div>
-                )}
-              </div>
-              
-              {/* Second row - always showing with proper structure */}
-              <div className="service-row">
-                {filteredServices.slice(2, 4).map((service) => (
-                  <div 
-                    key={service.id} 
-                    className={`service-card row-card ${animatedItems.includes(service.id) ? 'animated' : ''}`}
-                    data-service-id={service.id}
-                  >
-                    <div className="service-image">
-                      <img src={service.image} alt={service.title} />
-                    </div>
-                    <div className="service-content">
-                      <h3>{service.title}</h3>
-                      <ul className="service-highlights-preview">
-                        {service.highlights.slice(0, 2).map((highlight, index) => (
-                          <li key={index}>{highlight.split(':')[0]}</li>
-                        ))}
-                      </ul>
-                      <button 
-                        className="btn btn-read-more" 
-                        onClick={() => openServiceModal(service)}
-                        aria-label={`Learn more about ${service.title}`}
-                      >
-                        Learn More
-                      </button>
-                    </div>
-                  </div>
-                ))}
-                {/* Add empty placeholders as needed for second row */}
-                {filteredServices.length < 3 && (
-                  <>
-                    <div className="service-card row-card empty-card"></div>
-                    <div className="service-card row-card empty-card"></div>
-                  </>
-                )}
-                {filteredServices.length === 3 && (
-                  <div className="service-card row-card empty-card"></div>
-                )}
-              </div>
-              
-              {/* Third row - for when we have more than 4 services */}
-              {filteredServices.length > 4 && (
-                <div className="service-row">
-                  {filteredServices.slice(4).map((service) => (
-                    <div 
-                      key={service.id} 
-                      className={`service-card row-card ${animatedItems.includes(service.id) ? 'animated' : ''}`}
-                      data-service-id={service.id}
-                    >
-                      <div className="service-image">
-                        <img src={service.image} alt={service.title} />
-                      </div>
-                      <div className="service-content">
-                        <h3>{service.title}</h3>
-                        <ul className="service-highlights-preview">
-                          {service.highlights.slice(0, 2).map((highlight, index) => (
-                            <li key={index}>{highlight.split(':')[0]}</li>
-                          ))}
-                        </ul>
-                        <button 
-                          className="btn btn-read-more" 
-                          onClick={() => openServiceModal(service)}
-                          aria-label={`Learn more about ${service.title}`}
-                        >
-                          Learn More
-                        </button>
-                      </div>
-                    </div>
-                  ))}
+          <div className="services-grid responsive-grid">
+            {services.map(service => (
+              <div 
+                key={service.id}
+                className="service-card" 
+                data-category={service.category}
+                onClick={() => openServiceModal(service)}
+              >
+                <div className="service-card-image">
+                  <img src={service.image} alt={service.title} />
                 </div>
-              )}
-            </div>
-          ) : (
-            <div className="no-services-message">
-              <p>No services found in this category. Please try another category.</p>
-            </div>
-          )}
+                <div className="service-content">
+                  <h3>{service.title}</h3>
+                  <ServiceContent serviceType={service.category} />
+                  <button className="btn btn-primary">
+                    Learn More
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Render all services row BEFORE emergency section when "all" category is active */}
-      {activeCategory === 'all' && (
-        <div style={{ 
-          position: 'relative', 
-          marginBottom: '30px',
-          zIndex: 5 
-        }}>
-          <ServiceRow />
+      {/* Filtered services display */}
+      {activeCategory !== 'all' && (
+        <div data-category={activeCategory}>
+          <div className="container">
+            <div className="services-grid">
+              {filteredServices.map((service) => (
+                <div
+                  key={service.id}
+                  className="service-card"
+                  data-service-id={service.id}
+                  onClick={() => openServiceModal(service)}
+                >
+                  <div className="service-card-image">
+                    <img src={service.image} alt={service.title} />
+                  </div>
+                  <div className="service-content">
+                    <h3>{service.title}</h3>
+                    <ServiceContent serviceType={service.category} />
+                    <button className="btn btn-primary">
+                      Learn More
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
-      
-      {/* Streamlined emergency services section */}
-      <section className="emergency-services" style={{ position: 'relative', zIndex: 1 }}>
+
+      {/* Emergency services section - Enhanced prominence */}
+      <section className="emergency-services">
         <div className="container">
           <div className="emergency-content">
             <div className="emergency-text">
-              <h2>Emergency Dental Care</h2>
-              <p>Dental emergencies can happen at any time. Our team is prepared to provide prompt care for urgent situations.</p>
+              <h2>24/7 Emergency Dental Care</h2>
+              <p>Dental emergencies require immediate attention. Our dedicated team is available 24 hours a day, 7 days a week to provide prompt and effective care when you need it most.</p>
               <ul className="emergency-list">
-                <li>Severe toothache or pain</li>
+                <li>Severe toothache or dental pain</li>
                 <li>Broken, chipped, or knocked-out teeth</li>
-                <li>Lost crowns or fillings</li>
-                <li>Oral injuries and trauma</li>
+                <li>Lost crowns, fillings, or dental work</li>
+                <li>Oral injuries and facial trauma</li>
+                <li>Dental infections and severe swelling</li>
+                <li>Bleeding from the mouth that won't stop</li>
               </ul>
               <div className="emergency-contact">
-                <h3>24/7 Emergency Line</h3>
+                <h3>24/7 Emergency Hotline</h3>
                 <a href="tel:5551234567" className="phone-number">(555) 123-4567</a>
-                <Link to="/contact" className="btn btn-outline">Contact Us</Link>
+                <p>Our emergency team is standing by to assist you day or night.</p>
+                <div className="emergency-buttons">
+                  <Link to="/appointment" className="btn btn-primary">Book Emergency Visit</Link>
+                  <Link to="/contact" className="btn btn-outline">Contact Information</Link>
+                </div>
               </div>
             </div>
             <div className="emergency-image">
@@ -559,12 +383,16 @@ const Services: React.FC = () => {
                 src="https://images.pexels.com/photos/3881449/pexels-photo-3881449.jpeg?auto=compress&cs=tinysrgb&w=800" 
                 alt="Emergency Dental Care" 
               />
+              <div className="emergency-badge">
+                <span>24/7</span>
+                <small>Emergency Care</small>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Clear, compelling CTA section */}
+      {/* CTA section */}
       <section className="services-cta">
         <div className="container">
           <h2>Ready to Experience Quality Dental Care?</h2>
@@ -572,8 +400,8 @@ const Services: React.FC = () => {
           <Link to="/appointment" className="btn btn-primary">Book Your Appointment</Link>
         </div>
       </section>
-      
-      {/* Modal for service details - using the standalone component */}
+
+      {/* Modal for service details */}
       {isModalOpen && selectedService && (
         <ServiceModal 
           service={selectedService} 

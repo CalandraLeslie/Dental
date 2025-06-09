@@ -30,9 +30,9 @@ const Header: React.FC = () => {
         <nav className="main-nav">
           <ul>
             <li><Link to="/">Home</Link></li>
+            <li><Link to="/services">Emergency</Link></li> {/* Changed from "Services" to "Emergency" */}
+            <li><Link to="/pricing">Services</Link></li> {/* Changed from "Pricing" to "Services" */}
             <li><Link to="/about">About</Link></li>
-            <li><Link to="/services">Services</Link></li>
-            <li><Link to="/pricing">Pricing</Link></li>
             <li><Link to="/contact">Contact</Link></li>
           </ul>
         </nav>

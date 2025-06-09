@@ -11,26 +11,15 @@ const Navigation: React.FC = () => {
                         {/* Logo area is now intentionally empty */}
                     </Link>
                 </div>
-                <ul className="nav-links">
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/about">About Us</Link>
-                    </li>
-                    <li>
-                        <Link to="/services">Services</Link>
-                    </li>
-                    <li>
-                        <Link to="/pricing">Pricing</Link>
-                    </li>
-                    <li>
-                        <Link to="/contact">Contact</Link>
-                    </li>
-                    <li className="appointment-link">
-                        <Link to="/appointment" className="appointment-btn">Book Appointment</Link>
-                    </li>
-                </ul>
+                <nav>
+                  <ul className="nav-links">
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/services">Emergency</Link></li> {/* Changed from "Services" to "Emergency" */}
+                    <li><Link to="/pricing">Services</Link></li> {/* Changed from "Pricing" to "Services" */}
+                    <li><Link to="/about">About</Link></li>
+                    <li><Link to="/contact">Contact</Link></li>
+                  </ul>
+                </nav>
             </div>
         </nav>
     );

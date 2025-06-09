@@ -15,6 +15,12 @@ const About: React.FC = () => {
   return (
     <div className="about-page">
       <section className="about-hero">
+        <img 
+          src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2070&auto=format&fit=crop" 
+          alt="Our Dental Team" 
+          className="hero-bg"
+        />
+        <div className="hero-overlay"></div>
         <div className="container">
           <motion.h1 
             initial="hidden"
@@ -31,12 +37,6 @@ const About: React.FC = () => {
           >
             Providing exceptional dental care in a comfortable environment since 2005
           </motion.p>
-          <div className="about-hero-image">
-            <img 
-              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2070&auto=format&fit=crop" 
-              alt="Our Dental Team" 
-            />
-          </div>
         </div>
       </section>
 

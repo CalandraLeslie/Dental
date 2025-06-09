@@ -9,23 +9,60 @@
 
 /* Hero Section */
 .services-hero {
-  background-color: white;
-  background-image: none; /* Remove gradient */
-  color: var(--primary); /* Change text color for visibility */
-  padding: 3rem 0 4rem; /* Reduced from 4rem 0 5rem */
-  text-align: center;
   position: relative;
-  /* Add subtle separator */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  height: 450px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.services-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Add blue gradient overlay to match other pages */
+.services-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(30, 69, 131, 0.85) 0%, rgba(20, 105, 175, 0.75) 100%);
+  z-index: 2;
+}
+
+.services-hero .container {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: white;
+  padding: 0 2rem;
+  max-width: 800px;
 }
 
 .services-hero h1 {
-  color: var(--primary); /* Change from white to primary */
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .services-hero .lead {
-  color: var(--foreground); /* Change from white to foreground */
-  opacity: 1; /* Full opacity for readability */
+  font-size: 1.25rem;
+  opacity: 0.9;
+  margin: 0;
+  color: white;
+  line-height: 1.6;
 }
 
 /* Remove the wave effect that assumes a colored background */
@@ -38,6 +75,17 @@
   padding: 0.5rem 0; /* Reduced from 1rem 0 */
   border-bottom: 1px solid var(--border);
   margin-bottom: 1rem; /* Reduced from 1.5rem */
+}
+
+/* Move filter tabs up to directly follow hero section */
+.services-filter {
+  margin-top: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .filter-tabs {
@@ -85,48 +133,44 @@
   position: relative; /* Allow for absolute positioning */
 }
 
+/* Ensure services grid follows immediately after tabs */
+.services-main {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem; /* Reduced from 2rem */
-  margin-top: 1.5rem; /* Increase spacing between title and grid */
+  gap: 1.5rem;
+  margin-top: 1.5rem;
   width: 100%;
+}
+
+/* Remove section title that was creating space */
+.section-title {
+  display: none;
 }
 
 .service-card {
   background-color: white;
-  border-radius: var(--radius);
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.service-card.animated {
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Service image consistent sizing */
-.service-image,
-.service-card.horizontal .service-image,
-.service-card.row-card .service-image {
-  height: 180px; /* Slightly smaller images for better balance */
-  position: relative;
+.service-image {
+  height: 200px;
   overflow: hidden;
-  width: 100%;
 }
 
 .service-image img {
@@ -142,59 +186,50 @@
 
 .service-content {
   padding: 1.5rem;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  margin-top: 0;
 }
 
 .service-content h3 {
+  margin-top: 0;
   margin-bottom: 1rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.service-highlights-preview {
-  list-style-type: none;
-  padding: 0;
-  margin: 0 0 1.5rem;
-}
-
-.service-highlights-preview li {
-  position: relative;
-  padding-left: 1.5rem;
-  margin-bottom: 0.75rem;
-  font-size: 0.95rem;
-  color: var(--muted-foreground);
-}
-
-.service-highlights-preview li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
   color: var(--primary);
-  font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
-.btn-read-more {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.6rem 1.2rem;
-  background-color: transparent;
-  color: var(--primary);
-  border: 1px solid var(--primary);
-  border-radius: var(--radius);
-  font-weight: 500;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.service-content p {
+  margin-bottom: 1rem;
+  color: #555;
+  flex-grow: 1;
 }
 
-.btn-read-more:hover {
-  background-color: var(--primary);
-  color: white;
+.service-content .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* Media queries for responsive layout */
+@media (max-width: 1200px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-card-image {
+    padding-bottom: 60%; /* Slightly shorter image on mobile */
+  }
 }
 
 /* Emergency Services */
@@ -251,6 +286,80 @@
   display: block;
 }
 
+/* Emergency Hero Styling */
+.hero-emergency-cta {
+  margin-top: 1.5rem;
+}
+
+.btn-emergency {
+  background-color: #e53e3e;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(229, 62, 62, 0.25);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-emergency:hover {
+  background-color: #c53030;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(229, 62, 62, 0.35);
+}
+
+.btn-emergency::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 0 0-1.02.24l-2.2 2.2a15.045 15.045 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2a9 9 0 0 0-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Move emergency section up to be more prominent */
+.emergency-services {
+  margin-top: 0 !important;
+  padding-top: 3rem !important;
+  position: relative;
+  z-index: 5;
+  background-color: #fef2f2;
+  border-top: 2px solid #fee2e2;
+  border-bottom: 2px solid #fee2e2;
+}
+
+.emergency-text h2 {
+  color: #c53030;
+  font-size: 2rem;
+}
+
+.emergency-contact {
+  background-color: white;
+  border: 1px solid #fee2e2;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.emergency-contact h3 {
+  color: #c53030;
+}
+
+.emergency-contact .phone-number {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #c53030;
+  margin-bottom: 1rem;
+  display: block;
+}
+
 /* CTA Section */
 .services-cta {
   text-align: center;
@@ -298,9 +407,12 @@
   width: 100%;
   max-width: 800px;
   border-radius: 8px;
-  margin: auto;
+  margin: 60px auto;
   position: relative;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-close-btn {
@@ -348,8 +460,8 @@
 
 .modal-body {
   padding: 20px;
-  max-height: 50vh;
   overflow-y: auto;
+  flex-grow: 1;
 }
 
 .service-description {
@@ -382,7 +494,7 @@
 }
 
 .modal-footer .btn-primary {
-  background-color: var(--primary, #1e4583);
+  background-color: var(--primary);
   color: white;
   text-decoration: none;
   border: none;
@@ -390,8 +502,8 @@
 
 .modal-footer .btn-outline {
   background: transparent;
-  color: var(--primary, #1e4583);
-  border: 1px solid var(--primary, #1e4583);
+  color: var(--primary);
+  border: 1px solid var(--primary);
 }
 
 @media (max-width: 768px) {
@@ -1553,7 +1665,7 @@ html body .services-page div[data-category="all"] {
 html body .services-page div[data-category="all"],
 html body .services-page [data-category="all"],
 html body div[data-category="all"],
-html body [data-category="all"],
+html [data-category="all"],
 body [data-category="all"],
 div[data-category="all"],
 [data-category="all"],
@@ -1613,6 +1725,11 @@ html body .services-main:not(.services-horizontal):not(.services-rows):not(.cate
   z-index: -9999 !important;
   overflow: hidden !important;
   clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(100%) !important;
+  pointer-events: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
 }
 
 /* Target the All button specifically */
@@ -1693,256 +1810,60 @@ html body div[data-category="all"] + .emergency-services {
   transform: none !important;
 }
 
-/* Enable the "All" section with proper spacing */
-div[data-category="all"],
-[data-category="all"],
-.services-main {
-  display: block !important;
-  height: auto !important;
-  width: 100% !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  position: static !important;
-  left: auto !important;
-  top: auto !important;
-  overflow: visible !important;
-  margin-bottom: 60px !important; /* Create adequate space for card content */
+/* Emergency badge on image */
+.emergency-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* Force all 4 service cards into a single row with FIXED ORDER */
-html body .services-page div[data-category="all"] .services-grid,
-html body .services-page .services-main .services-grid {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  justify-content: space-between !important;
-  gap: 20px !important;
-  width: 100% !important;
-  margin: 2rem 0 !important;
+.emergency-badge {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background-color: #e53e3e;
+  color: white;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Make service cards visible with adequate height */
-html body .services-page div[data-category="all"] .service-card,
-html body .services-page .services-main .service-card {
-  flex: 1 0 calc(25% - 15px) !important;
-  width: calc(25% - 15px) !important;
-  min-width: calc(25% - 15px) !important;
-  max-width: calc(25% - 15px) !important;
-  min-height: 550px !important; /* Extra tall to fit all content */
-  height: auto !important;
-  max-height: none !important;
-  margin: 0 !important;
-  overflow: visible !important;
-  display: flex !important;
-  flex-direction: column !important;
+.emergency-badge span {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
-/* Ensure card content is properly displayed */
-html body .services-page div[data-category="all"] .service-card .service-content,
-html body .services-page .services-main .service-card .service-content {
-  padding: 1rem !important;
-  flex: 1 1 auto !important;
-  display: block !important; /* Change to block to ensure text visibility */
-  overflow: visible !important;
-  height: auto !important;
-  min-height: 250px !important; /* Ensure space for content */
+.emergency-badge small {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* Ensure emergency section appears below cards without overlap */
-html body .services-page div[data-category="all"] + .emergency-services,
-html body .services-page .services-main + .emergency-services {
-  margin-top: 80px !important; /* Increased space to prevent overlap */
-  position: static !important;
-  transform: none !important;
+.emergency-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
 }
 
-/* Fix order: Force Cosmetic and Specialty to appear first (left) */
-html body .services-page div[data-category="all"] .service-card[data-category="cosmetic"],
-html body .services-page div[data-category="all"] .service-card[data-category="specialty"] {
-  order: -1 !important;
-}
-
-/* Explicitly set order for all service cards */
-html body .services-page div[data-category="all"] .service-card[data-category="cosmetic"] {
-  order: 1 !important;
-}
-html body .services-page div[data-category="all"] .service-card[data-category="preventive"] {
-  order: 2 !important;
-}
-html body .services-page div[data-category="all"] .service-card[data-category="restorative"] {
-  order: 3 !important;
-}
-html body .services-page div[data-category="all"] .service-card[data-category="specialty"] {
-  order: 4 !important;
-}
-
-/* RESET ALL PREVIOUS RULES FOR ALL SERVICES */
-html body .services-page div[data-category="all"],
-html body .services-page [data-category="all"],
-html body div[data-category="all"],
-html [data-category="all"],
-body [data-category="all"],
-div[data-category="all"],
-[data-category="all"],
-.services-main {
-  display: block !important;
-  height: auto !important;
-  width: 100% !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  position: static !important;
-  left: auto !important;
-  top: auto !important;
-  overflow: visible !important;
-  margin-bottom: 100px !important; /* Extra space below cards */
-}
-
-/* Show the All filter tab */
-html body .filter-btn[data-filter="all"],
-html body .filter-btn[data-category="all"],
-.filter-btn[data-filter="all"] {
-  display: inline-flex !important;
-  visibility: visible !important;
-  width: auto !important;
-  height: auto !important;
-  padding: 0.4rem 0.6rem !important;
-}
-
-/* SIMPLE FLEX ROW FOR ALL SERVICES */
-html body .services-page div[data-category="all"] .services-grid {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  justify-content: space-between !important;
-  gap: 20px !important;
-  width: 100% !important;
-  margin: 2rem 0 3rem !important;
-}
-
-/* FIXED HEIGHT CARDS */
-html body .services-page div[data-category="all"] .service-card {
-  flex: 1 0 calc(25% - 15px) !important;
-  width: calc(25% - 15px) !important;
-  min-width: calc(25% - 15px) !important;
-  max-width: calc(25% - 15px) !important;
-  min-height: 550px !important; /* Extra tall to fit all content */
-  height: auto !important;
-  max-height: none !important;
-  margin: 0 !important;
-  overflow: visible !important;
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-/* FIX CONTENT DISPLAY */
-html body .services-page div[data-category="all"] .service-card .service-content {
-  flex: 1 !important;
-  overflow: visible !important;
-  display: block !important;
-  padding: 1rem !important;
-  height: auto !important;
-  min-height: 300px !important;
-}
-
-/* ENSURE EMERGENCY SECTION APPEARS BELOW */
-html body .services-page div[data-category="all"] ~ .emergency-services,
-html body .emergency-services {
-  margin-top: 100px !important;
-  position: static !important;
-  transform: none !important;
-}
-
-/* !!! FINAL FIX - FORCE ALL SERVICES IN ONE ROW !!! */
-html body .services-page div[data-category="all"],
-html body .services-page [data-category="all"],
-html body div[data-category="all"],
-html body [data-category="all"],
-body [data-category="all"],
-div[data-category="all"],
-[data-category="all"],
-.services-main {
-  display: block !important;
-  height: auto !important;
-  width: 100% !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  position: static !important;
-  left: auto !important;
-  top: auto !important;
-  overflow: visible !important;
-  margin-bottom: 150px !important; /* Even more space to prevent overlap */
-}
-
-/* Force ONE ROW with display:flex - highest specificity possible */
-html body .services-page div[data-category="all"] .services-grid,
-html body .services-page .services-main .services-grid,
-html body div[data-category="all"] .services-grid {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important; /* Prevent wrapping to multiple rows */
-  justify-content: space-between !important;
-  align-items: stretch !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  gap: 15px !important;
-  grid-template-columns: unset !important;
-  grid-auto-flow: unset !important;
-}
-
-/* Show and enable All filter tab */
-html body .filter-btn[data-filter="all"],
-html body button[data-filter="all"],
-.filter-btn[data-filter="all"] {
-  display: inline-flex !important;
-  visibility: visible !important;
-  width: auto !important;
-  height: auto !important;
-  padding: 0.4rem 0.6rem !important;
-  margin: 0 !important;
-  position: static !important;
-  overflow: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  clip: auto !important;
-  clip-path: none !important;
-}
-
-/* Set explicit width for all service cards */
-html body .services-page div[data-category="all"] .service-card {
-  flex: 1 1 20% !important;
-  width: 20% !important;
-  min-width: 0 !important;
-  max-width: 20% !important;
-  height: auto !important;
-  min-height: 450px !important;
-  max-height: none !important;
-  margin: 0 !important;
-  overflow: visible !important;
-  display: flex !important;
-  flex-direction: column !important;
-  position: static !important;
-}
-
-/* Ensure content is visible in each card */
-html body .services-page div[data-category="all"] .service-card .service-content {
-  padding: 1rem !important;
-  flex: 1 !important;
-  overflow: visible !important;
-  display: block !important;
-  height: auto !important;
-  min-height: 250px !important;
-  font-size: 0.9rem !important;
-}
-
-/* Prevent emergency section from overlapping */
-html body .services-page div[data-category="all"] + .emergency-services,
-html body .emergency-services {
-  margin-top: 150px !important;
-  position: static !important;
-  transform: none !important;
-  clear: both !important;
-  z-index: 1 !important;
+@media (max-width: 768px) {
+  .emergency-buttons {
+    flex-direction: column;
+  }
+  
+  .emergency-badge {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .emergency-badge span {
+    font-size: 1.2rem;
+  }
 }

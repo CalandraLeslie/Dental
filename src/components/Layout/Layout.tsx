@@ -64,10 +64,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Link to="/about">About</Link>
               </li>
               <li className={location.pathname === '/services' ? 'active' : ''}>
-                <Link to="/services">Services</Link>
+                <Link to="/services">Emergency</Link>
               </li>
               <li className={location.pathname === '/pricing' ? 'active' : ''}>
-                <Link to="/pricing">Pricing</Link>
+                <Link to="/pricing">Services</Link>
               </li>
               <li className={location.pathname === '/contact' ? 'active' : ''}>
                 <Link to="/contact">Contact</Link>
