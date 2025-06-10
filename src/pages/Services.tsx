@@ -160,7 +160,7 @@ const ServiceContent: React.FC<{serviceType: string}> = ({ serviceType }) => {
 const Services: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<ServiceType | null>(null);
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory] = useState<string>('all'); // Changed to string type to match category values
 
   // Services data with professional dental images and icons
   const services = [
