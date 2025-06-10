@@ -39,7 +39,7 @@ const Contact: React.FC = () => {
         />
         <div className="hero-content">
           <h1>Contact Us</h1>
-          <p className="lead">We're here to answer your questions and provide the care you need</p>
+          <p className="lead text-white">We're here to answer your questions and provide the care you need</p>
         </div>
       </section>
 
