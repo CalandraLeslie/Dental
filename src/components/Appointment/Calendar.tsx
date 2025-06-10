@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
-import { Calendar as ReactCalendar } from 'react-calendar';
+import Calendar, { CalendarProps as ReactCalendarProps } from 'react-calendar';
+type Value = ReactCalendarProps['value'];
 import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 
-const Calendar: React.FC = () => {
-    const [date, setDate] = useState<Date | null>(null);
+interface CalendarProps {
+  onDateSelect: (date: Date) => void;
+}
 
-    const handleDateChange = (selectedDate: Date) => {
-        setDate(selectedDate);
-    };
+const AppointmentCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
+  const [value, setValue] = useState<Value>(null);
 
-    return (
-        <div className="calendar-container">
-            <h2>Select an Appointment Date</h2>
-            <ReactCalendar
-                onChange={handleDateChange}
-                value={date}
-                minDate={new Date()}
-                className="custom-calendar"
-            />
-            {date && (
-                <div className="selected-date">
-                    <p>You have selected: {date.toDateString()}</p>
-                </div>
-            )}
-        </div>
-    );
+  const handleDateChange = (value: Value) => {
+    setValue(value);
+    if (value instanceof Date) {
+      onDateSelect(value);
+    }
+  };
+  return (
+    <div className="appointment-calendar">
+      <Calendar
+        onChange={handleDateChange}
+        value={value}
+        minDate={new Date()}
+      />
+    </div>
+  );
 };
 
-export default Calendar;
+export default AppointmentCalendar;
