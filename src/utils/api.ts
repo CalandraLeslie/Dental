@@ -66,13 +66,9 @@ export const sendContactMessage = async (contactData: ContactFormData) => {
 
 // Update function signatures with proper types
 export const submitAppointment = async (appointmentData: AppointmentFormData) => {
-  // Your implementation
-  console.log('Submitting appointment:', appointmentData);
-  return { success: true };
+  return bookAppointment(appointmentData);
 };
 
 export const submitContactForm = async (contactData: ContactFormData) => {
-  // Your implementation
-  console.log('Submitting contact form:', contactData);
-  return { success: true };
+  return sendContactMessage(contactData);
 };

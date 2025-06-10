@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './styles/appointment.css';
-import { submitAppointment } from '../utils/api';
+import { submitAppointment, AppointmentFormData } from '../utils/api';
 
 const Appointment: React.FC = () => {
   // Form state with multiple steps
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<AppointmentFormData>({
     firstName: '',
     lastName: '',
     email: '',
@@ -38,41 +38,30 @@ const Appointment: React.FC = () => {
     });
   };
 
-  const nextStep = () => {
-    setCurrentStep(currentStep + 1);
-    // Scroll to top of form container
-    const formElement = document.querySelector('.appointment-form-container');
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const prevStep = () => {
-    setCurrentStep(currentStep - 1);
-    // Scroll to top of form container
-    const formElement = document.querySelector('.appointment-form-container');
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.agreement) {
+      alert('Please agree to the terms and conditions');
+      return;
+    }
+
     try {
       await submitAppointment(formData);
       setSubmitted(true);
       setCurrentStep(3); // Move to confirmation step
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error submitting appointment:', error);
     }
   };
 
-  const availableTimeSlots = [
-    '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', 
-    '11:00 AM', '11:30 AM', '1:00 PM', '1:30 PM', 
-    '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', 
-    '4:00 PM', '4:30 PM'
-  ];
+  const nextStep = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const prevStep = () => {
+    setCurrentStep(currentStep - 1);
+  };
 
   if (submitted) {
     return (
