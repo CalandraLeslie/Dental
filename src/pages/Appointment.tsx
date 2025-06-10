@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './styles/appointment.css';
+import { submitAppointment } from '../utils/api';
 
 const Appointment: React.FC = () => {
   // Form state with multiple steps
@@ -55,11 +56,15 @@ const Appointment: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    window.scrollTo(0, 0);
+    try {
+      await submitAppointment(formData);
+      setSubmitted(true);
+      setCurrentStep(3); // Move to confirmation step
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
 
   const availableTimeSlots = [
